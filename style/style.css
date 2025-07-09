@@ -1,0 +1,249 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Pacifico', cursive;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  background-color: #f0f0f0;
+  transition: background-color 1s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+#arrow {
+  position: absolute;
+  bottom: 110px;
+  font-size: 50px;
+  animation: bounceArrow 1.8s infinite;
+  user-select: none;
+  pointer-events: none;
+  z-index: 5;
+  color: #1e1e2f;
+  transition: opacity 0.5s ease;
+}
+
+.night #arrow {
+  color: #fffacd;
+}
+
+@keyframes bounceArrow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+#toggleButton {
+  margin-bottom: 30px;
+  width: 64px;
+  height: 64px;
+  font-size: 28px;
+  background-color: #1e1e2f;
+  color: #fffacd;
+  border: none;
+  border-radius: 50%;
+  cursor: auto;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  animation: float 3s ease-in-out infinite;
+  z-index: 10;
+  position: relative;
+  user-select: none;
+}
+
+#toggleButton:hover{
+  width: 69px;
+  height: 69px;
+}
+
+#toggleButton:active {
+  transform: scale(0.92);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+}
+
+.night #toggleButton {
+  background-color: #fffacd;
+  color: #1e1e2f;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.night {
+  background: radial-gradient(#164211, #071234);
+}
+
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  width: 2px;
+  height: 2px;
+  opacity: 0.8;
+  animation: twinkle 2s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(2); }
+}
+
+.meteor {
+  position: absolute;
+  width: 2px;
+  height: 100px;
+  background: linear-gradient(-45deg, white, rgba(255, 255, 255, 0));
+  opacity: 0.6;
+  animation: meteor-fall 1s linear forwards;
+  z-index: 3;
+  transform: rotate(45deg);
+}
+
+@keyframes meteor-fall {
+  0% { transform: translate(0, 0) rotate(45deg); opacity: 0.8; }
+  100% { transform: translate(-800px, 800px) rotate(45deg); opacity: 0; }
+}
+
+.message-box {
+  position: absolute;
+  top: 20%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+  font-size: 1.5rem;
+  opacity: 0;
+  transition: opacity 1s ease;
+  font-weight: 300;
+  user-select: none;
+  animation: float 4s ease-in-out infinite, glowText 1.5s ease-in-out;
+}
+
+.message-box.show {
+  opacity: 1;
+}
+
+.message-line {
+  margin: 10px 0;
+  opacity: 0;
+}
+
+.message-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  color: #ffffff;
+  opacity: 0;
+  transition: opacity 1s ease;
+  animation: float 3s ease-in-out infinite, glowText 1.5s ease-in-out infinite;
+  user-select: none;
+}
+
+.message-title.show {
+  opacity: 1;
+}
+
+@keyframes glowText {
+  0%   { text-shadow: 0 0 4px #66ffcc; }
+  50%  { text-shadow: 0 0 12px #66ffcc; }
+  100% { text-shadow: 0 0 4px #66ffcc; }
+}
+
+.explosion-star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.9;
+  z-index: 20;
+  pointer-events: none;
+  animation: explode 800ms ease-out forwards;
+}
+
+@keyframes explode {
+  to {
+    transform: translate(var(--dx), var(--dy)) scale(0.2);
+    opacity: 0;
+  }
+}
+
+.snowflake {
+  position: absolute;
+  top: -10px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  pointer-events: none;
+  animation: fall linear infinite;
+  z-index: 2;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh);
+  }
+}
+
+@media (max-width: 768px) {
+  #toggleButton {
+    width: 55px;
+    height: 55px;
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .message-box {
+    font-size: 1.2rem;
+    top: 25%;
+  }
+
+  .message-title {
+    font-size: 2rem;
+    padding: 6px 12px;
+  }
+
+  #arrow {
+    bottom: 95px;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  #toggleButton {
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  .message-box {
+    font-size: 3vw;
+    top: 20%;
+  }
+
+  .message-title {
+    font-size: 1rem;
+    padding: 4px 5px;
+  }
+
+  #arrow {
+    bottom: 85px;
+    font-size: 18px;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 1.2s ease-out forwards;
+}
